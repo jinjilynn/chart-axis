@@ -1,0 +1,29 @@
+{
+  "name": "chart-axis",
+  "version": "1.0.0",
+  "description": "Generate a continuous value interval, and determine the coordinate position according to the specified value",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jinjilynn/chart-axis.git"
+  },
+  "keywords": [
+    "chart",
+    "value",
+    "axis",
+    "range",
+    "interval",
+    "position",
+    "grid"
+  ],
+  "author": "jinjilin@hotmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jinjilynn/chart-axis/issues"
+  },
+  "homepage": "https://github.com/jinjilynn/chart-axis#readme",
+  "devDependencies": {
+    "@babel/runtime": "^7.8.7",
+    "core-js": "^2.6.11"
+  }
+}
