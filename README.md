@@ -13,7 +13,7 @@ yarn add geolib
 ## Usage
 
 ``` javascript
-import { getIntervalRange, getCoordByValue } from 'chart-axix'
+import { getIntervalRange, getCoordByValue } from 'chart-axis'
 ```
 
 ```javascript
