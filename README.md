@@ -17,7 +17,7 @@ import { getIntervalRange, getCoordByValue } from 'chart-axis'
 ```
 
 ```javascript
-<script src="lib/chart_axix.js"></script>
+<script src="lib/chart_axis.js"></script>
 
 <script>
   const { getIntervalRange, getCoordByValue } = chart_axis;
