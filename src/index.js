@@ -1,6 +1,7 @@
 import { getNum, getDigit, getTopByMax, getBottomByMin, generateYvalueByStepAndMax } from './tool';
 
 export function getIntervalRange({ data = [], intervals = 5, steps = [3] }) {
+    if (!window.isFinite(intervals) || intervals <= 0) { intervals = 5 };
     let maxY = -Infinity;
     let minY = Infinity;
     Object.values(data).forEach(value => {
@@ -57,10 +58,10 @@ export function getIntervalRange({ data = [], intervals = 5, steps = [3] }) {
         _result_temp.results.push(min_num);
 
         _available_results.forEach((it, index) => {
-            if (index === 0) {
+            if (index === 0 && Math.abs(it.min - min_num) < Math.abs(_result_temp.min - min_num)) {
                 _result_temp = it
             } else {
-                if (it.min < _result_temp.min) {
+                if (Math.abs(it.min - min_num) < Math.abs(_result_temp.min - min_num)) {
                     _result_temp = it;
                 }
             }
@@ -68,9 +69,14 @@ export function getIntervalRange({ data = [], intervals = 5, steps = [3] }) {
         _results = _result_temp;
     }
     if (_results) {
-        min_num < 0 && _results.results.splice(_results.results.length - 2, 1, 0);
-        // min_num > 0 && _results.results.push(0);
-        min_num > 0 && _results.results.splice(_results.results.length - 1, 1, 0);
+        if (!_results.results.some(it => it === 0)) {
+            const _index = _results.results.findIndex(it => it < 0);
+            if (_index === -1) {
+                _results.results.push(0);
+            } else {
+                _results.results.splice(_index, 0, 0);
+            }
+        }
         return _results.results.reverse();
     } else {
         const span = ((max_num - min_num) / intervals);
@@ -100,4 +106,58 @@ export function getIntervalRange({ data = [], intervals = 5, steps = [3] }) {
         min_num > 0 && _results.push(0);
         return _results.reverse()
     }
+}
+
+export function getCoordByValue({ type = "reverse", minCoord, maxCoord, range }) {
+    if (!window.isFinite(minCoord) || !window.isFinite(maxCoord)) {
+        console.error('mminCoordin、maxCoord must be number');
+        return;
+    }
+    if (maxCoord <= minCoord) {
+        console.error('maxCoord must bigger than min');
+        return;
+    }
+    if (!Array.isArray(range)) {
+        console.error('range must be an array');
+        return;
+    }
+    if (range.length < 2) {
+        console.error('range at least has two element');
+        return;
+    }
+    if (type !== 'reverse' && type !== 'normal') {
+        type = 'reverse';
+    }
+    const _span = (maxCoord - minCoord) / (range.length - 1);
+    return (value) => {
+        if (!window.isFinite(value)) return;
+        if (value > range[range.length - 1]) {
+            console.error('value can not be bigger than the range maxmun');
+            return;
+        }
+        if (value < range[0]) {
+            console.error('value can not be smaller than the range minimum');
+            return;
+        }
+        let y;
+        let _position = 0;
+        for (let i = 0; i < range.length; i += 1) {
+            if (value <= range[i]) {
+                _position = i;
+                break;
+            }
+        }
+        if (_position <= 1) {
+            const y_step_0 = _span / (range[1] - range[0]);
+            (type === "reverse") && (y = maxCoord - (value - range[0]) * y_step_0);
+            (type === "normal") && (y = minCoord + (value - range[0]) * y_step_0);
+        } else {
+            const min_level = _position - 1;
+            const y_step_i = _span / (range[_position] - range[min_level]);
+            (type === "reverse") && (y = maxCoord - _span * (min_level) - (value - range[min_level]) * y_step_i);
+            (type === "normal") && (y = minCoord + _span * (min_level) + (value - range[min_level]) * y_step_i);
+        }
+        return y;
+    }
+
 }

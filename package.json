@@ -14,7 +14,8 @@
     "range",
     "interval",
     "position",
-    "grid"
+    "grid",
+    "coordinates"
   ],
   "author": "jinjilin@hotmail.com",
   "license": "MIT",
