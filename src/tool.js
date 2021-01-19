@@ -20,7 +20,8 @@ export function getDigit(num) {
 
 export function getTopByMax(maxnumber) {
     const max_digit = getDigit(maxnumber);
-    const bigger_num = (Math.floor(maxnumber / max_digit) + 1) * max_digit;
+    let bigger_num = (Math.floor(maxnumber / max_digit) + 1) * max_digit;
+    !window.isFinite(bigger_num) && (bigger_num = 1);
     if (maxnumber > (bigger_num - max_digit / 2)) {
         return bigger_num;
     } else {

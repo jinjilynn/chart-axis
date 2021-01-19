@@ -14,6 +14,8 @@ yarn add geolib
 
 ``` javascript
 import { getIntervalRange, getCoordByValue } from 'chart-axis'
+
+const { getIntervalRange, getCoordByValue } = require('chart-axis');
 ```
 
 ```javascript
@@ -56,7 +58,7 @@ Param 'intervals'  determies how many intervals there are in the value range. It
 
 #### steps
 
-Param steps is an array type,  the inner elements can be valued from 1 to 10. it determines how to decrease in return the range
+Param steps is an array type,  the inner elements can be valued from 1 to 10. it determines how to decrease in the range returned
 
 ### getCoordByValue({ type = "reverse", minCoord, maxCoord, range })
 
