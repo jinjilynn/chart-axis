@@ -1,6 +1,6 @@
 import { getNum, getDigit, getTopByMax, getBottomByMin, generateYvalueByStepAndMax } from './tool';
 
-export function getIntervalRange({ data = [], intervals = 5, steps = [3] }) {
+export function getIntervalRange({ data = [], intervals = 5, steps = [3], max, forceInt }) {
     if (!window.isFinite(intervals) || intervals <= 0) { intervals = 5 };
     let maxY = -Infinity;
     let minY = Infinity;
@@ -17,7 +17,11 @@ export function getIntervalRange({ data = [], intervals = 5, steps = [3] }) {
     }
 
     const min_num = getBottomByMin(minY);
-    const max_num = getTopByMax(maxY);
+    let max_num = getTopByMax(maxY);
+    if (typeof max === 'number' && window.isFinite(max) && max > min_num) {
+        max_num = max;
+    }
+
     let _limits = [];
     if (Array.isArray(steps)) {
         for (let i = 0; i < steps.length; i += 1) {
@@ -37,6 +41,7 @@ export function getIntervalRange({ data = [], intervals = 5, steps = [3] }) {
             _results_by_step.push({ min: _min, results: _result_array });
         }
     });
+    let output = [];
     let _results;
     if (_results_by_step.length > 0) {
         let _available_results = [];
@@ -77,7 +82,7 @@ export function getIntervalRange({ data = [], intervals = 5, steps = [3] }) {
                 _results.results.splice(_index, 0, 0);
             }
         }
-        return _results.results.reverse();
+        output = _results.results.reverse();
     } else {
         const span = ((max_num - min_num) / intervals);
         let fixed = 1;
@@ -104,8 +109,13 @@ export function getIntervalRange({ data = [], intervals = 5, steps = [3] }) {
             _results.splice(_index < 0 ? 0 : _index, 0, 0);
         }
         min_num > 0 && _results.push(0);
-        return _results.reverse()
+        output = _results.reverse();
     }
+    if (forceInt) {
+        let _temp_output = output.map(it => Math.ceil(it));
+        output = Array.from(new Set(_temp_output));
+    }
+    return output;
 }
 
 export function getCoordByValue({ type = "reverse", minCoord, maxCoord, range }) {

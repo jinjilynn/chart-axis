@@ -15,7 +15,6 @@ export function getDigit(num) {
         }
         return _digit;
     }
-
 }
 
 export function getTopByMax(maxnumber) {
