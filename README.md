@@ -1,6 +1,6 @@
 # chart-axis
 
-Library to generate a continuous value range by some interval, and get the coordinate position according to the specified value
+Library to generate a continuous range by some interval, and get the coordinate position according to the specified value
 
 ## Install
 
@@ -28,9 +28,9 @@ const { getIntervalRange, getCoordByValue } = require('chart-axis');
 
 ## Functions
 
-### getIntervalRange({ data, intervals = 5, steps = [3] })
+### getIntervalRange({ data, intervals = 5, forceInt=false, max=null, steps = [3] })
 
-This function takes up to 3 arguments. First one argument must be valid. 
+This function takes up to 3 arguments. First one argument is required. 
 
 It returns an incremental array represents the range
 
