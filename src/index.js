@@ -1,6 +1,7 @@
 import { getNum, getDigit, getTopByMax, getBottomByMin, generateYvalueByStepAndMax } from './tool';
 
 export function getIntervalRange({ data = [], intervals = 5, steps = [3], max, forceInt }) {
+    if (!Array.isArray(data) || (Array.isArray(data) && data.length === 0)) return [];
     if (!window.isFinite(intervals) || intervals <= 0) { intervals = 5 };
     let maxY = -Infinity;
     let minY = Infinity;

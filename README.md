@@ -60,6 +60,10 @@ Param 'intervals'  determies how many intervals there are in the value range. It
 
 Param steps is an array type,  the inner elements can be valued from 1 to 10. it determines how to decrease in the range returned
 
+### max
+
+### forceInt
+
 ### getCoordByValue({ type = "reverse", minCoord, maxCoord, range })
 
 This function return another function that reutrns the coordinate according to a specified value which is within the given range
