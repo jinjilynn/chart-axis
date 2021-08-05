@@ -116,7 +116,7 @@ export function getIntervalRange({ data = [], intervals = 5, steps = [3], max, f
         let _temp_output = output.map(it => Math.ceil(it));
         output = Array.from(new Set(_temp_output));
     }
-    return output;
+    return Array.from(new Set(output));
 }
 
 export function getCoordByValue({ type = "reverse", minCoord, maxCoord, range }) {
