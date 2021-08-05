@@ -1,6 +1,6 @@
 {
   "name": "chart-axis",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Generate a continuous value range intervaled, and determine the coordinate position according to the specified value",
   "main": "dist/index.js",
   "repository": {
